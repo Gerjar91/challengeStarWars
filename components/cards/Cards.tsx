@@ -1,8 +1,11 @@
 import React from 'react'
 import style from "./Cards.module.css"
-import '../../styles/font.module.css'; // Importa el archivo CSS de la fuente
+import '../../styles/font.module.css'; 
+
 
 export default function Cards() {
+
+   // const dispatch = useDispatch()
     return (
         <div className={style.container}>
             <div className={style.title}>
@@ -12,5 +15,6 @@ export default function Cards() {
                 <h1 >yoda</h1>
             </div>
         </div>
+     
     )
 }

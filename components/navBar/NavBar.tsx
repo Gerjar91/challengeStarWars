@@ -2,19 +2,32 @@
 
 import React, { useState } from 'react'
 import style from "./NavBar.module.css"
-import { getCharacter } from './getCharacterByName';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { addCharacterByname } from '@/redux/action';
 
 
 function Navbar() {
-    
+    const dispatch = useDispatch()
+
+    //estado local para controlar input
     const [input, setInput] = useState("")
     const handlerChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInput(event.target.value)
     }
-    const searchCharacter = async() => {
-        getCharacter(input)
-        setInput("")
+    const searchCharacter = async () => {
+        try {
+            const url = `https://swapi.dev/api/people/?search=${input}`
+            const response = await axios(url)
+            response.data.results.forEach((el: any) => {
+                dispatch(addCharacterByname(el))
+            })
+            setInput("")
+        } catch (error) {
+            console.log(error);
+        }
     }
+
     return (
         <div className={style.navbar}>
             <h2 > Challenge Star Wars</h2>

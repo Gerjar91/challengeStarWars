@@ -1,12 +1,12 @@
 
 export interface Character {
-    character: Object
+    characters: Object[]
 }
 
 
-export const addCharacterByname = (character: Character) => {
+export const addCharacterByname = (characters:Object[]) => {
     return {
         type: "ADD_CHARACTER",
-        payload: character
+        payload: characters
     }
 }
