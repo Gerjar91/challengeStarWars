@@ -1,0 +1,59 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    background-color: rgb(68, 66, 66);
+    color: azure;
+    padding-left: 20px;
+    padding-right: 60px;
+    text-decoration: none;
+    height: 70px;
+
+}
+
+.navbar ul {
+    display: flex;
+    gap: 2rem;
+    color: azure;
+}
+
+.link {
+    text-decoration: none;
+    color: beige;
+}
+
+.link:hover {
+    scale: 1.1;
+}
+
+.input {
+    width: 20vw;
+    height: 5vh;
+    border-radius: 20px;
+    border: none;
+    justify-content: center;
+    display: flex;
+    padding: 10px;
+    border: 1px solid rgb(206, 175, 25);
+    background-color: rgb(113, 114, 114);
+    color: aliceblue;
+}
+.input:focus{
+    outline: 1.5px solid rgb(206, 175, 25);
+}
+.navbar h2 {
+    font-family: StarWarsFont;
+color: rgb(220, 179, 17);
+}
+.button{
+    background-color: rgb(224, 224, 224);
+    border: none;
+    width: 60px;
+    border-radius: 20px;
+    color: black;
+}
+.button:hover{
+    scale: 1.1;
+    transition: 0.3s;
+}

@@ -1,0 +1,25 @@
+
+.container{
+    background-color: rgb(49, 48, 48);
+    width: 80%;
+    height: 130px;
+    border-radius: 15px;
+    margin: 10px;
+    border: 1px solid #E9CE23;
+    padding: 15px;
+    display: flex;
+}
+.container:hover{
+    scale: 1.02;
+    transition: .2s;
+}
+.container h1 {
+    font-family: StarWarsFont;
+}
+.title{
+    margin-left:10px ;
+    width: auto;
+    padding-right: 30px;
+    height: 100%;
+    border-right: 1px solid white;
+}
