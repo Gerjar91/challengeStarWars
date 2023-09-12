@@ -4,13 +4,3 @@
     flex-direction:column;
     width: 90%;
 }
-.containerFilters{
-    background-color:rgb(49, 48, 48);
-    width: 180px;
-    height: 60vh;
-    border-radius: 20px;
-    padding: 20px;
-    text-align: center;
-    z-index: -200;
-
-}

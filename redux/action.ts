@@ -10,3 +10,10 @@ export const addCharacterByname = (characters:Object[]) => {
         payload: characters
     }
 }
+
+export const addFilter = (filter:string) => {
+    return {
+        type: "ADD_FILTER",
+        payload: filter
+    }
+}

@@ -3,6 +3,7 @@ import style from "./page.module.css"
 import Cards from '@/components/cards/Cards'
 import "../../styles/font.module.css"
 import Navbar from '@/components/navBar/NavBar'
+import Filters from '@/components/filters/Filters'
 function home() {
 
 
@@ -13,7 +14,7 @@ function home() {
                 <div className={style.containerCards}>
                     <Cards />
                 </div>
-                <div className={style.containerFilters}>FILTROS</div>
+                <Filters />
             </div>
         </>
     )
