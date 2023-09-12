@@ -1,0 +1,52 @@
+.container {
+    background-color: rgb(49, 48, 48);
+    width: 80vw;
+    height: 130px;
+    border-radius: 15px;
+    margin: 10px;
+    border: 1px solid #E9CE23;
+    padding: 15px;
+    display: flex;
+    
+}
+
+.container:hover {
+    scale: 1.02;
+    transition: .2s;
+    box-shadow: 0px 0px 10px rgba(252, 211, 5, 1); /* Sombra uniforme */
+
+}
+
+.container h1 {
+    font-family: StarWarsFont02;
+}
+
+.title {
+    margin-left: 10px;
+    width: 30vw;
+    padding-right: 30px;
+    height: 100%;
+    border-right: 1px solid white;
+}
+
+.infoContainer {
+    padding: 15px;
+    width: 20vw;
+    border-right: 1px solid white;
+}
+
+.infoContainer h4 {
+    padding: 4px;
+    display: flex;
+
+}
+
+.infoContainer h4 p {
+    color: rgb(223, 148, 18);
+    margin-left: 10px;
+}
+.number {
+    color: rgb(206, 175, 25);
+    padding: 20px;
+    font-size: 50px;
+}

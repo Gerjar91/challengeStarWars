@@ -40,6 +40,7 @@ function Navbar() {
 
                 </input>
                 <button
+                    disabled={input.length > 1 ? false : true}
                     className={style.button}
                     onClick={searchCharacter}>
                     Search
