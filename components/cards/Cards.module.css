@@ -8,8 +8,10 @@
     animation-duration: 25s;
     animation-iteration-count: infinite;
     transform: scaleX(-1);
-    width: 50%;
-    margin-left: 550px;
+    width: 45%;
+    bottom: -10vh;
+
+    margin-left: 580px;
     margin-top: 40px;
     z-index: -99;
     position: absolute;
@@ -65,3 +67,13 @@
     color: black;
 
 }
+.pageTitle{
+    font-family:StarWarsFont02 ;
+    margin: 20px;
+}
+.toast-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }

@@ -3,6 +3,8 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import CartProvider from './CartProvider'
+import { Toaster } from 'react-hot-toast'
+import Footer from '@/components/footer/Footer'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -23,6 +25,7 @@ export default function RootLayout({
         <CartProvider>
           {children}
         </CartProvider>
+        <Footer/>
       </body>
     </html>
   )

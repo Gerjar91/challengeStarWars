@@ -1,27 +1,29 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
-import { DataState } from '@/redux/reducer';
 import Card from '../card/Card';
 import style from './Cards.module.css';
 import { dataCharacterFilters } from '@/redux/selector';
+import { DataState } from '@/redux/reducer';
+import { Toaster, toast } from 'react-hot-toast';
 
 export default function Cards() {
-    let dataCharacters = useSelector(dataCharacterFilters)
+    let dataCharactersFilters = useSelector(dataCharacterFilters)
+    let filters = useSelector((state: DataState) => state.filters)
 
     //agregar index a cada card 
     let index = 1
-    dataCharacters.forEach((el => {
+    dataCharactersFilters.forEach((el => {
         el.index = index++
     }))
 
     //fracionar el estado para paginarlo 
     const dataCharactersPage = [];
-    for (let i = 0; i < dataCharacters.length; i += 4) {
-        const array = dataCharacters.slice(i, i + 4);
+    for (let i = 0; i < dataCharactersFilters.length; i += 4) {
+        const array = dataCharactersFilters.slice(i, i + 4);
         dataCharactersPage.push(array);
     }
-    const [page, setPage] = useState(dataCharactersPage.length)
+    const [page, setPage] = useState(0)
 
 
     // controladores del index para paginado
@@ -31,18 +33,33 @@ export default function Cards() {
     const backPage = () => {
         setPage(page - 1)
     }
+    //seterar a pagina 0 cuando se aplican filtros 
+    useEffect(() => {
+        setPage(0);
+    }, [dataCharactersFilters.length]);
+   
+    
 
+    // arrojar un error si no se encurntran filtros 
+    useEffect(() => {
+        if (filters.length > 0 && dataCharactersFilters.length == 0) {
+            toast.error("There are no characters for those filters")
+        }
+    }, [filters])
 
     return (
-        <>{!dataCharacters.length ? (
+        <>{!dataCharactersFilters.length ? (
             <>
                 <h1 className={style.title}>Enter a star wars character to add to the list.</h1>
-             {/* <img className={style.image} src='https://freepngimg.com/save/16912-star-wars-jedi-png/1023x877'></img>  */}
+                <Toaster />
+
+             <img className={style.image} src='https://freepngimg.com/save/16912-star-wars-jedi-png/1023x877'></img>  
             </>
         ) : (
-            <>
-                {/* <img className={style.image} src='https://freepngimg.com/save/16912-star-wars-jedi-png/1023x877'></img> */} 
-                <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+                 <img className={style.image} src='https://freepngimg.com/save/16912-star-wars-jedi-png/1023x877'></img> 
+                <div style={{ display: "flex", alignItems: "center" }}>
+                    <h4 className={style.pageTitle}>PAGES</h4>
                     <button
                         className={style.buttonPage}
                         onClick={backPage}
@@ -58,7 +75,7 @@ export default function Cards() {
                         ⇨
                     </button>
                 </div>
-                {dataCharactersPage[page].map((item) =>
+                {dataCharactersPage[page]?.map((item) =>
                     <div key={item.name}>
                         <Card
                             name={item.name}
@@ -72,7 +89,7 @@ export default function Cards() {
                         />
                     </div>
                 )}
-            </>
+            </div>
         )}
 
         </>

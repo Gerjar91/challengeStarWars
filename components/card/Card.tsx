@@ -12,7 +12,7 @@ export default function Card(props: StarWarsCharacter) {
             </div>
             <div className={style.infoContainer}>
                 <h4>GENDER :  <p> {props.gender}</p> </h4>
-                <h4>HEIGHT :  <p>{props.height}cm</p> </h4>
+                <h4>HEIGHT :  <p>{props.height} cm</p> </h4>
                 <h4>SKIN COLOR :  <p> {props.skin_color}</p></h4>
             </div>
             <div className={style.infoContainer}>

@@ -10,7 +10,7 @@ function home() {
     return (
         <>
             <Navbar />
-            <div style={{ display: "flex", justifyContent: "space-between", padding: "35px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", padding: "20px" }}>
                 <div className={style.containerCards}>
                     <Cards />
                 </div>

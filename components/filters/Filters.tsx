@@ -1,10 +1,10 @@
 "use client"
 
-import React, { useState } from 'react'
+import React from 'react'
 import style from "./Filters.module.css"
 import { useDispatch, useSelector } from 'react-redux'
-import { DataState } from '@/redux/reducer'
 import { addFilter } from '@/redux/action'
+import { DataState } from '@/redux/reducer'
 
 export interface Filters {
     filters: []
@@ -13,12 +13,12 @@ function Filters() {
     const dispatch = useDispatch()
 
     const handlerFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-        let obj =[event.target.name,event.target.value]
-        console.log(obj);
-
         dispatch(addFilter(event.target.value))
     }
-
+    //inhabilitar input de filtros 
+    let disabled = true
+    const characters = useSelector((state: DataState) => state.characters)
+    if (characters.length) disabled = false
     return (
         <div>
             <div className={style.containerFilters}>FILTERS
@@ -26,6 +26,7 @@ function Filters() {
                     <h5>GENDER</h5>
                     <label>Male
                         <input
+                            disabled={disabled}
                             name='gender'
                             type="checkbox"
                             value="male"
@@ -34,33 +35,20 @@ function Filters() {
                     </label>
                     <label>Female
                         <input
+                            disabled={disabled}
                             name='gender'
                             type="checkbox"
                             value="female"
                             onChange={handlerFilter}
                         />
                     </label>
-                    <label>unknown
-                        <input
-                            name='gender'
-                            type="checkbox"
-                            value="unknown"
-                            onChange={handlerFilter}
-                        />
-                    </label>
-                    <label>n/a
-                        <input
-                            name='gender'
-                            type="checkbox"
-                            value="n/a"
-                            onChange={handlerFilter}
-                        />
-                    </label>
+
                 </div>
                 <div className={style.containerType}>
                     <h5>BIRTH YEAR</h5>
                     <label>BBY
                         <input
+                            disabled={disabled}
                             type="checkbox"
                             value="BBY"
                             onChange={handlerFilter}
@@ -68,6 +56,7 @@ function Filters() {
                     </label>
                     <label>ABY
                         <input
+                            disabled={disabled}
                             type="checkbox"
                             value="ABY"
                             onChange={handlerFilter}
@@ -79,6 +68,7 @@ function Filters() {
                     <h5>EYES COLOR</h5>
                     <label>Blue
                         <input
+                            disabled={disabled}
                             type="checkbox"
                             value="blue"
                             onChange={handlerFilter}
@@ -86,6 +76,7 @@ function Filters() {
                     </label>
                     <label>Orange
                         <input
+                            disabled={disabled}
                             type="checkbox"
                             value="orange"
                             onChange={handlerFilter}
@@ -93,6 +84,7 @@ function Filters() {
                     </label>
                     <label>Brown
                         <input
+                            disabled={disabled}
                             type="checkbox"
                             value="brown"
                             onChange={handlerFilter}
@@ -100,6 +92,7 @@ function Filters() {
                     </label>
                     <label>Yellow
                         <input
+                            disabled={disabled}
                             type="checkbox"
                             value="yellow"
                             onChange={handlerFilter}

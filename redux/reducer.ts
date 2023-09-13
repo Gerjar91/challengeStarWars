@@ -6,10 +6,6 @@ export interface Action {
     type: string
     payload: any
 }
-export interface Filters{
-    gender:string[]
-    eye_color:string[]
-}
 
 export interface StarWarsCharacter {
     birth_year?: string;
@@ -34,15 +30,24 @@ export interface StarWarsCharacter {
 
 const initialstate: DataState = {
     characters: [],
-    filters: []
+    filters: [],
 }
 const reducer = (state = initialstate, action: Action) => {
     switch (action.type) {
+
         case 'ADD_CHARACTER':
-            return {
-                ...state,
-                characters: [...state.characters, action.payload]
-            };
+            // Verificar si el personaje ya existe en el estado
+            const characterExists = state.characters.some((character) =>
+                character.name === action.payload.name
+            );
+            if (!characterExists) {
+                return {
+                    ...state,
+                    characters: [...state.characters, action.payload],
+                };
+            }
+            return state;
+
         case 'ADD_FILTER':
             if (state.filters.includes(action.payload)) {
                 let deleteFilters = state.filters.filter(el => el !== action.payload)
@@ -50,11 +55,11 @@ const reducer = (state = initialstate, action: Action) => {
                     ...state,
                     filters: deleteFilters
                 };
-            }else 
-            return {
-                ...state,
-                filters: [...state.filters, action.payload]
-            };
+            } else
+                return {
+                    ...state,
+                    filters: [...state.filters, action.payload]
+                };
 
         default:
             return {
