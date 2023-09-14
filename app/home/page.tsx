@@ -6,7 +6,6 @@ import Navbar from '@/components/navBar/NavBar'
 import Filters from '@/components/filters/Filters'
 function home() {
 
-
     return (
         <>
             <Navbar />

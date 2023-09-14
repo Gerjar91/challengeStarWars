@@ -1,21 +1,40 @@
-import { DataState } from "./reducer";
+import { DataState, StarWarsCharacter } from "./reducer";
 
 export const dataCharacterFilters = (state: DataState) => {
     const { filters, characters } = state;
-    console.log("filtros", filters);
 
-    if (filters.length > 0) {
-        const filteredData = characters.filter((character) =>
-            filters.every((filter) =>
-                character.gender === filter ||
-                character.eye_color === filter ||
-                character.birth_year?.includes(filter)
-            )
-        );
+    // Crear una copia de los filtros originales
+    let filtersToApply: Record<string, any> = { ...filters };
 
-        console.log(filteredData);
-        return filteredData;
-    } else {
-        return characters;
+    // Crear una copia de la lista original
+    let charactersFilters = [...characters];
+
+    if (filtersToApply.order === "A-Z") {
+        charactersFilters = charactersFilters.sort((a, b) => {
+            if (a.name < b.name) return -1;
+            return 0;
+        });
+        delete filtersToApply.order;
     }
+    if (filtersToApply.order === "Z-A") {
+        charactersFilters = charactersFilters.sort((a, b) => {
+            if (a.name > b.name) return -1;
+            return 0;
+        });
+        delete filtersToApply.order;
+    }
+
+    // Iterar sobre los objetos para aplicar los filtros restantes
+    charactersFilters = charactersFilters.filter((character: Record<string, any>) => {
+        let matchesFilters = true;
+        for (const key in filtersToApply) {
+            if (character[key] !== filtersToApply[key]) {
+                matchesFilters = false;
+                break;
+            }
+        }
+        return matchesFilters; // Cumple con todos los filtros
+    });
+
+    return charactersFilters;
 };

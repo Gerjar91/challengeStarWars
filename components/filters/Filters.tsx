@@ -1,105 +1,89 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import style from "./Filters.module.css"
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addFilter } from '@/redux/action'
-import { DataState } from '@/redux/reducer'
 
 export interface Filters {
-    filters: []
+    order?: string
+    gender?: string
+    birth_year?: string
+    eye_color?: string
 }
 function Filters() {
-    const dispatch = useDispatch()
 
-    const handlerFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-        dispatch(addFilter(event.target.value))
+    const dispatch = useDispatch()
+    const [filterObj, setFilterObj] = useState<any>({})
+
+    //cargar filtros al estado 
+    const handlerInput = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const { name, value } = event.target;
+        if (value) {
+            setFilterObj((filterObj: Filters) => ({
+                ...filterObj,
+                [name]: value,
+            }));
+        } else {
+            setFilterObj((prevState: Filters) => {
+                const updatedState: any = { ...prevState };
+                delete updatedState[name];
+                return updatedState;
+            })
+        }
     }
-    //inhabilitar input de filtros 
-    let disabled = true
-    const characters = useSelector((state: DataState) => state.characters)
-    if (characters.length) disabled = false
+    //despachar una action por cada filtro que se agrega 
+    useEffect(() => {
+        dispatch(addFilter(filterObj))
+    }, [filterObj])
+
+
+    const deleteAllFilters = () => {
+        setFilterObj({})
+    }
+
     return (
         <div>
             <div className={style.containerFilters}>FILTERS
                 <div className={style.containerType}>
+                    <h5>ORDER</h5>
+                    <select className={style.select} onChange={handlerInput} name='order' >
+                        <option value={""}>All</option>
+                        <option >A-Z</option>
+                        <option>Z-A</option>
+                    </select>
+                </div>
+                <div className={style.containerType}>
                     <h5>GENDER</h5>
-                    <label>Male
-                        <input
-                            disabled={disabled}
-                            name='gender'
-                            type="checkbox"
-                            value="male"
-                            onChange={handlerFilter}
-                        />
-                    </label>
-                    <label>Female
-                        <input
-                            disabled={disabled}
-                            name='gender'
-                            type="checkbox"
-                            value="female"
-                            onChange={handlerFilter}
-                        />
-                    </label>
-
+                    <select className={style.select} onChange={handlerInput} name='gender' >
+                        <option value={""}>All</option>
+                        <option >male</option>
+                        <option>female</option>
+                    </select>
                 </div>
                 <div className={style.containerType}>
                     <h5>BIRTH YEAR</h5>
-                    <label>BBY
-                        <input
-                            disabled={disabled}
-                            type="checkbox"
-                            value="BBY"
-                            onChange={handlerFilter}
-                        />
-                    </label>
-                    <label>ABY
-                        <input
-                            disabled={disabled}
-                            type="checkbox"
-                            value="ABY"
-                            onChange={handlerFilter}
-                        />
-                    </label>
-
+                    <select className={style.select} onChange={handlerInput} name='birth_year' >
+                        <option value={""}>All</option>
+                        <option>BBY</option>
+                        <option>ABY</option>
+                    </select>
                 </div>
                 <div className={style.containerType}>
-                    <h5>EYES COLOR</h5>
-                    <label>Blue
-                        <input
-                            disabled={disabled}
-                            type="checkbox"
-                            value="blue"
-                            onChange={handlerFilter}
-                        />
-                    </label>
-                    <label>Orange
-                        <input
-                            disabled={disabled}
-                            type="checkbox"
-                            value="orange"
-                            onChange={handlerFilter}
-                        />
-                    </label>
-                    <label>Brown
-                        <input
-                            disabled={disabled}
-                            type="checkbox"
-                            value="brown"
-                            onChange={handlerFilter}
-                        />
-                    </label>
-                    <label>Yellow
-                        <input
-                            disabled={disabled}
-                            type="checkbox"
-                            value="yellow"
-                            onChange={handlerFilter}
-                        />
-                    </label>
-
+                    <h5>EYE COLOR</h5>
+                    <select className={style.select} onChange={handlerInput} name='eye_color' >
+                        <option value={""}>All</option>
+                        <option >blue</option>
+                        <option>yellow</option>
+                        <option>orange</option>
+                        <option>brown</option>
+                    </select>
                 </div>
+                <button
+                    onClick={deleteAllFilters}
+                    disabled={Object.keys(filterObj).length ? false : true}
+                    className={style.button}
+                >clear filters</button>
             </div>
         </div>
     )

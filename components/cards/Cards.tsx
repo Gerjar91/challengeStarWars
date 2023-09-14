@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import Card from '../card/Card';
 import style from './Cards.module.css';
-import { dataCharacterFilters } from '@/redux/selector';
+import {  dataCharacterFilters } from '@/redux/selector';
 import { DataState } from '@/redux/reducer';
 import { Toaster, toast } from 'react-hot-toast';
+import Image from 'next/image';
+import star01 from "../../assets/star01.png"
 
 export default function Cards() {
     let dataCharactersFilters = useSelector(dataCharacterFilters)
@@ -42,7 +44,7 @@ export default function Cards() {
 
     // arrojar un error si no se encurntran filtros 
     useEffect(() => {
-        if (filters.length > 0 && dataCharactersFilters.length == 0) {
+        if (Object.keys(filters).length > 0 && dataCharactersFilters.length == 0) {
             toast.error("There are no characters for those filters")
         }
     }, [filters])
@@ -53,11 +55,11 @@ export default function Cards() {
                 <h1 className={style.title}>Enter a star wars character to add to the list.</h1>
                 <Toaster />
 
-             <img className={style.image} src='https://freepngimg.com/save/16912-star-wars-jedi-png/1023x877'></img>  
+                <Image className={style.image} src={star01} alt=""/>
             </>
         ) : (
             <div style={{ display: "flex", flexDirection: "column" }}>
-                 <img className={style.image} src='https://freepngimg.com/save/16912-star-wars-jedi-png/1023x877'></img> 
+                <Image className={style.image} src={star01} alt=""/>
                 <div style={{ display: "flex", alignItems: "center" }}>
                     <h4 className={style.pageTitle}>PAGES</h4>
                     <button

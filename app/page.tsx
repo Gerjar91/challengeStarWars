@@ -1,6 +1,8 @@
 import styles from './page.module.css'
 import "../styles/font.module.css"
 import Link from 'next/link'
+import star01 from "../assets/star01.png"
+import Image from "next/image"
 
 export default function Home() {
   return (
@@ -13,8 +15,8 @@ export default function Home() {
       <Link href="home">
         <button className={styles.button}>HOME</button>
       </Link>
-      <img className={styles.image01} src='https://freepngimg.com/save/16912-star-wars-jedi-png/1023x877'></img>
-      {/* <div className={styles.footer}></div> */}
+      <Image className={styles.image01} src={star01} alt=""/>
+
     </div>
   )
 }

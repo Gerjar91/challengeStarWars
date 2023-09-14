@@ -5,13 +5,13 @@
 
 .image {
     animation-name: imageAnimate;
-    animation-duration: 25s;
+    animation-duration: 29s;
     animation-iteration-count: infinite;
     transform: scaleX(-1);
-    width: 45%;
+    width: 50%;
+    height: 90%;
     bottom: -10vh;
-
-    margin-left: 580px;
+    margin-left: 620px;
     margin-top: 40px;
     z-index: -99;
     position: absolute;
@@ -24,7 +24,7 @@
     }
 
     50% {
-        scale: 1.06;
+        scale: 1.0;
     }
 
     100% {
