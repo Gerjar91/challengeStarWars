@@ -3,34 +3,7 @@
     font-size: 40px;
 }
 
-.image {
-    animation-name: imageAnimate;
-    animation-duration: 29s;
-    animation-iteration-count: infinite;
-    transform: scaleX(-1);
-    width: 50%;
-    height: 90%;
-    bottom: -10vh;
-    margin-left: 620px;
-    margin-top: 40px;
-    z-index: -99;
-    position: absolute;
-}
 
-
-@keyframes imageAnimate {
-    0% {
-        scale: 1.1;
-    }
-
-    50% {
-        scale: 1.0;
-    }
-
-    100% {
-        scale: 1.1;
-    }
-}
 
 .buttonPage {
     border: none;

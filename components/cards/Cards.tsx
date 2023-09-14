@@ -54,13 +54,10 @@ export default function Cards() {
             <>
                 <h1 className={style.title}>Enter a star wars character to add to the list.</h1>
                 <Toaster />
-
-                <Image className={style.image} src={star01} alt=""/>
             </>
         ) : (
             <div style={{ display: "flex", flexDirection: "column" }}>
-                <Image className={style.image} src={star01} alt=""/>
-                <div style={{ display: "flex", alignItems: "center" }}>
+               <div style={{ display: "flex", alignItems: "center" }}>
                     <h4 className={style.pageTitle}>PAGES</h4>
                     <button
                         className={style.buttonPage}
