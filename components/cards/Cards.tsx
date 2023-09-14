@@ -88,6 +88,7 @@ export default function Cards() {
                             index={item.index}
                             gender={item.gender}
                             mass={item.mass}
+                            image={item.image}
                         />
                     </div>
                 )}

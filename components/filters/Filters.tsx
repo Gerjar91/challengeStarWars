@@ -59,6 +59,7 @@ function Filters() {
                         <option value={""}>All</option>
                         <option >male</option>
                         <option>female</option>
+                        <option>unknown</option>
                     </select>
                 </div>
                 <div className={style.containerType}>
@@ -77,6 +78,8 @@ function Filters() {
                         <option>yellow</option>
                         <option>orange</option>
                         <option>brown</option>
+                        <option>unknown</option>
+
                     </select>
                 </div>
                 <button

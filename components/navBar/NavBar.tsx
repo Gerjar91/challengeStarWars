@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import style from "./NavBar.module.css"
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCharacterByname } from '@/redux/action';
+import { addCharacterByname, addImagesCharacter } from '@/redux/action';
 import { LoaderIcon, Toaster, toast } from 'react-hot-toast';
 import { DataState, StarWarsCharacter } from '@/redux/reducer';
 
@@ -24,18 +24,32 @@ function Navbar() {
         setInput(event.target.value)
     }
 
+    // carga de estado con imagenes de personajes 
+    const addDataImage = async () => {
+        let dataImages:Record<string, string> = {};
+        try {
+            const data = await axios.get('https://akabab.github.io/starwars-api/api/all.json');
+            data.data.forEach((element: DataImages) => {
+                dataImages[element.name] = element.image;
+            });
+            dispatch(addImagesCharacter(dataImages));
+            return dataImages
+        } catch (error) {
+            console.log(error);
+            toast.error('An error occurred while loading images. Please try again later.');
+        }
+    };
 
-    const loadingImages = async () => {
-        let dataImages = new Map()
-        const data = await axios("https://akabab.github.io/starwars-api/api/all.json")
-        data.data.forEach((element: DataImages) => {
-            dataImages.set(element.name, element.image)
-    
-        });
-        return dataImages
-    }
+    useEffect(() => {
+        addDataImage();
+    }, []);
 
+
+    // carga de datos del estado 
+    let imagesMap : Record<string, string> = useSelector((state: DataState) => state.imagesCharactes)
     let characters = useSelector((state: DataState) => state.characters)
+
+
     //solicitud de info a la APi 
     const searchCharacter = async () => {
         setLoading(true)
@@ -50,21 +64,22 @@ function Navbar() {
             }
             //obtener solo los personajes que no estan en el estado
             const charactersToAdd = response.data.results.filter((newCharacter: StarWarsCharacter) => {
-                for (const existCharacter of characters) {                    
+                for (const existCharacter of characters) {
                     if (newCharacter.name === existCharacter.name) {
                         return false;
                     }
                 }
                 return true;
             });
-    
+
             if (charactersToAdd.length === 0) {
                 setLoading(false);
                 toast.error("These characters are already in the list.");
             } else {
-                let imagesMap = await loadingImages()
                 charactersToAdd.forEach((item: StarWarsCharacter) => {
-                    item.image = imagesMap.get(item.name)
+                    console.log(imagesMap[item.name]);
+                    
+                    item.image = imagesMap[item.name]
                     dispatch(addCharacterByname(item));
                 });
                 setLoading(false);

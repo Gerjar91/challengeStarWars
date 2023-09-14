@@ -22,3 +22,9 @@ export const removeAllfilters = () => {
         type: 'REMOVE_ALL_FILTER',
     }
 }
+export const addImagesCharacter = (dataImages:Record<string, string>) => {    
+    return {
+        type: 'ADD_IMAGES_CHARACTER',
+        payload: dataImages
+    }
+}

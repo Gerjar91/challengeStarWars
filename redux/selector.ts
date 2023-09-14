@@ -7,7 +7,7 @@ export const dataCharacterFilters = (state: DataState) => {
     let filtersToApply: Record<string, any> = { ...filters };
 
     // Crear una copia de la lista original
-    let charactersFilters = [...characters];
+    let charactersFilters = characters;
 
     if (filtersToApply.order === "A-Z") {
         charactersFilters = charactersFilters.sort((a, b) => {

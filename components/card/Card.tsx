@@ -10,6 +10,9 @@ export default function Card(props: StarWarsCharacter) {
             <div className={style.title}>
                 <h1 >{props.name}</h1>
             </div>
+            <div className={style.imageContainer}>
+            <img  src={props.image}/>
+            </div>
             <div className={style.infoContainer}>
                 <h4>GENDER :  <p> {props.gender}</p> </h4>
                 <h4>HEIGHT :  <p>{props.height} cm</p> </h4>

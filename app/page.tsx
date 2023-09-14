@@ -15,7 +15,7 @@ export default function Home() {
       <Link href="home">
         <button className={styles.button}>HOME</button>
       </Link>
-      <Image className={styles.image01} src={star01} alt=""/>
+      <Image className={styles.image01} src={star01} alt="" />
 
     </div>
   )
